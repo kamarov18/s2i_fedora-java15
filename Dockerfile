@@ -1,4 +1,4 @@
-FROM fedora:34
+FROM fedora:33
 
 ARG EXPOSE_PORT=8080
 EXPOSE ${EXPOSE_PORT}
@@ -33,8 +33,8 @@ USER root
 RUN yum -y update \
   && yum install -y --setopt=skip_missing_names_on_install=False \
        unzip rsync \
-       java-15-openjdk \
-       java-15-openjdk-devel \
+       java-latest-openjdk \
+       java-latest-openjdk-devel \
   && yum clean all \
   && curl https://archive.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz | \
     tar -xzf - -C /opt \
