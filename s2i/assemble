@@ -220,7 +220,8 @@ function build_gradle() {
   # =========
   # Run Gradle
   echo "Running './gradlew --no-daemon ${gradle_args} ${GRADLE_ARGS_APPEND}'"
-  ./gradlew --no-daemon ${gradle_args} ${GRADLE_ARGS_APPEND}
+  #./gradlew --no-daemon ${gradle_args} ${GRADLE_ARGS_APPEND}
+  ./gradlew build
   check_error "Gradle build" $?
 
   # ==============
