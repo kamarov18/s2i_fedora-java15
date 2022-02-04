@@ -219,10 +219,11 @@ function build_gradle() {
 
   # =========
   # Run Gradle
-  echo "Running './gradlew --no-daemon ${gradle_args} ${GRADLE_ARGS_APPEND}'"
+  echo "Running ./gradlew assemble, don't test (we don't use buid)"
+  # echo "Running './gradlew --no-daemon ${gradle_args} ${GRADLE_ARGS_APPEND}'"
   #./gradlew --no-daemon ${gradle_args} ${GRADLE_ARGS_APPEND}
-  ./gradlew build
-  check_error "Gradle build" $?
+  ./gradlew assemble
+  check_error "Gradle assemble" $?
 
   # ==============
   # Copy artifacts
