@@ -515,9 +515,9 @@ proxy_options() {
 # Check if a keystore is defined in the env var and add it to java options
 keystore_options() {
   local ret=""
-  if [ -n "${KEYSTORE_PATH}"] ; then
+  if [ -n "${KEYSTORE_PATH}" ] ; then
     ret="-Djavax.net.ssl.keyStore=${KEYSTORE_PATH}"
-    if [ -n "${KEYSTORE_PASSWORD}"] ; then
+    if [ -n "${KEYSTORE_PASSWORD}" ] ; then
       ret="$ret -Djavax.net.ssl.keyStorePassword=${KEYSTORE_PASSWORD}"
     else
       echo "WARNING: a keystore is defined but there is no \$KEYSTORE_PASSWORD variable" >&2
