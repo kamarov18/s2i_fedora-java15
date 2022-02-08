@@ -512,6 +512,24 @@ proxy_options() {
 
 # ==============================================================================
 
+# Check if a keystore is defined in the env var and add it to java options
+keystore_options() {
+  local ret=""
+  if [ -n "${KEYSTORE_PATH}"] ; then
+    ret="-Djavax.net.ssl.keyStore=${KEYSTORE_PATH}"
+    if [ -n "${KEYSTORE_PASSWORD}"] ; then
+      ret="$ret -Djavax.net.ssl.keyStorePassword=${KEYSTORE_PASSWORD}"
+    else
+      echo "WARNING: a keystore is defined but there is no \$KEYSTORE_PASSWORD variable" >&2
+    fi
+  fi
+  echo "$ret"
+}
+
+
+
+# ==============================================================================
+
 # Set process name if possible
 exec_args() {
   EXEC_ARGS=""
@@ -528,7 +546,7 @@ java_options() {
   # Normalize spaces with awk (i.e. trim and elimate double spaces)
   # See e.g. https://www.physicsforums.com/threads/awk-1-1-1-file-txt.658865/ for an explanation
   # of this awk idiom
-  echo "${JAVA_OPTIONS:-} $(run_java_options) $(debug_options) $(proxy_options) $(java_default_options)" | awk '$1=$1'
+  echo "${JAVA_OPTIONS:-} $(run_java_options) $(debug_options) $(proxy_options) $(keystore_options) $(java_default_options)" | awk '$1=$1'
 }
 
 # Fetch classpath from env or from a local "run-classpath" file
